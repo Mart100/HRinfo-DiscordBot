@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 const bot = new Discord.Client()
 const env = require('node-env-file')(__dirname + '/.env', {raise: false})
-const token = process.env.token
 
 // require scripts
 const commands = require('./scripts/commands.js')
