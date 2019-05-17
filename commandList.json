@@ -1,0 +1,11 @@
+{
+  "setdesc": { 
+    "permissions": "ADMINISTRATOR"
+  },
+  "help": {
+    "permissions": "all"
+  },
+  "tag": {
+    "permissions": "ADMINISTRATOR"
+  }
+}
