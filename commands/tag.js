@@ -9,5 +9,5 @@ module.exports = async (message) => {
 
   database.updateClan(message.guild.id, {tag: tag})
 
-  message.channel.send('Succesfully edited clan tag to '+tag)
+  message.channel.send('Succesfully edited clan tag')
 }
