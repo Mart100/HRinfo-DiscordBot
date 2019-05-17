@@ -26,10 +26,7 @@ function checkPermissions(message, commandName) {
   if(command.permissions == 'all') return true
   if(message.author.id == '235452157166485505') return true
   if(command.permissions == '') return false
-  if(command.permissions == 'ADMINISTRATOR') {
-    if(message.member.permissions.FLAGS == undefined) return false
-    return message.member.permissions.FLAGS['ADMINISTRATOR']
-  }
+  if(command.permissions == 'ADMINISTRATOR') return message.member.hasPermission('ADMINISTRATOR')
   
   // check if user has role or higher
   let hasHigherPermission = message.guild.roles.find((r) => r.name == command.permissions).comparePositionTo(message.member.highestRole) < 0
