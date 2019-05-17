@@ -6,9 +6,9 @@ const prefix = process.env.prefix
 function onMessage(message) {
   if(message.author.bot) return // No responding to other bots
   if(message.channel.type == 'dm') return // No commands in dm's
-  message.content = message.content.toLowerCase()
-  if(!message.content.startsWith(prefix)) return // Has to start with prefix
-  let commandName = message.content.split(' ')[0].replace(prefix, '') // get command
+  let content = message.content.toLowerCase()
+  if(!content.startsWith(prefix)) return // Has to start with prefix
+  let commandName = content.split(' ')[0].replace(prefix, '') // get command
   let command = commandList[commandName]
   if(command == undefined) return message.channel.send(`Command does not exist, type ${prefix}help for all commands`)
   // if has permission. Run

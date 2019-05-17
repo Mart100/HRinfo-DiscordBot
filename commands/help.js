@@ -9,7 +9,7 @@ module.exports = (message) => {
   **removeClan** - \`Removes this server from the clan list\`
   `
   let Embed = new Discord.RichEmbed()
-    .setAuthor('FlatEarthBot', 'https://i.imgur.com/dCYvK7M.png')
+    .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')
     .addField('commands:', commandsField)
     .setFooter(`Prefix: ${p}`)
     .setColor('#42BEAD')
