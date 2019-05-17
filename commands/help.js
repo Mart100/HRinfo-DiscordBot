@@ -4,9 +4,11 @@ module.exports = (message) => {
   let p = process.env.prefix
 
   let commandsField = `
-  **setDesc** - \`Sets the description of the clan\`
-  **tag** - \`Sets the clan tag\`
-  **removeClan** - \`Removes this server from the clan list\`
+  **${p}help** - \`Shows this epic message\`
+  **${p}setDesc** - \`Sets the description of the clan\`
+  **${p}tag** - \`Sets the clan tag\`
+  **${p}clan** <tag> - \`Get info about this clan or from other clans\`
+  **${p}removeClan** - \`Removes this server from the clan list\`
   `
   let Embed = new Discord.RichEmbed()
     .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')

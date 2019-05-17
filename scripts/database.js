@@ -1,7 +1,8 @@
 let admin
 let db
-let userList = {}
+let clanList = {}
 
+const utils = require('./utils.js')
 const serviceAccount = require("../databaseCredentials.json")
 
 module.exports = {
@@ -20,11 +21,32 @@ module.exports = {
     console.log('Database Initialized')
 
   },
-  updateClan(id, update) {
+  async updateClan(id, update) {
     db.collection('clans').doc(id).update(update)
+
+    await utils.sleep(5000)
+    clanList[id] = await this.getClan(id)
+
   },
   addClan(id) {
-    db.collection('clans').doc(id).set({})
+    db.collection('clans').doc(id).set({id: id})
+  },
+  removeClan(id) {
+    db.collection('clans').doc(id).delete()
+  },
+  getClans() {
+    if(Object.keys(clanList) > 0) return new Promise((resolve, reject) => { resolve(clanList) })
+    return new Promise((resolve, reject) => {
+      db.collection("clans").get().then((querySnapshot) => {
+        let clans = {}
+        querySnapshot.forEach((doc) => {
+          let data = doc.data() 
+          clans[data.id] = data
+        })
+        clanList = clans
+        resolve(clans)
+      })
+    })
   },
   getClan(id) {
     return new Promise((resolve, reject) => {
