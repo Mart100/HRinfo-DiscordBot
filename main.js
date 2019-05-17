@@ -22,15 +22,12 @@ bot.on('ready', async guild => {
 })
 
 // on new user joined
-bot.on('guildMemberAdd', async (member) => { database.newUser(member) })
+bot.on('guildMemberAdd', async (member) => { database.updateClan(member.guild.id, {memberCount: member.guild.memberCount }) })
 
 // joined new guild
 bot.on('guildCreate', async (guild) => { onJoin(guild) })
 
 // if message
 bot.on('message', async (message) => { commands(message) })
-
-// if ban
-bot.on('guildBanAdd', async (guild, user) => { gotBanned(guild, user) })
 
 bot.login(process.env.BOT_TOKEN)
