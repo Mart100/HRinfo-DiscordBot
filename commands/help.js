@@ -5,10 +5,11 @@ module.exports = (message) => {
 
   let commandsField = `
   **${p}help** - \`Shows this epic message\`
-  **${p}setDesc** - \`Sets the description of the clan\`
+  **${p}setdesc** - \`Sets the description of the clan\`
   **${p}tag** - \`Sets the clan tag\`
   **${p}clan** <tag> - \`Get info about this clan or from other clans\`
-  **${p}removeClan** - \`Removes this server from the clan list\`
+  **${p}removeclan** - \`Removes this server from the clan list\`
+  **${p}registerclan** - \`Registers this server as a clan, And puts it on the hrinfo site\`
   **${p}weapon** <weaponName> \`See information about a specific weapon\`
   **${p}invite** \`Get an invite link for this bot\`
   **${p}site** \` Link to the site connected to this bot!\`

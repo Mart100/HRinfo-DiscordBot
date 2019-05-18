@@ -6,6 +6,6 @@ module.exports = async (message) => {
 
   database.removeClan(message.guild.id)
 
-  message.channel.send('Successfully removed the clan, If you want to add it back use \`-registerclan\`')
+  message.channel.send(`Successfully removed the clan, If you want to add it back use \`${p}registerclan\``)
 }
 

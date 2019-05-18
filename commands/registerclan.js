@@ -25,5 +25,4 @@ let text = `
 This server is now registered as clan!
 This server should be added as clan to https://hrinfo.xyz/clans/ in ~1 minute
 Type \`${prefix}help\` For more commands of the bot. Such as setting a clan description that will be displayed on the site.
-If you have any questions, Feel free to DM the developer (Marto_0#1978)
 `
