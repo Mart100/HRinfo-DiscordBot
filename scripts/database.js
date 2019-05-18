@@ -1,6 +1,7 @@
 let admin
 let db
 let clanList = {}
+let weaponList = {}
 
 const utils = require('./utils.js')
 const serviceAccount = require("../databaseCredentials.json")
@@ -34,9 +35,25 @@ module.exports = {
   removeClan(id) {
     db.collection('clans').doc(id).delete()
   },
-  getClans() {
-    if(Object.keys(clanList) > 0) return new Promise((resolve, reject) => { resolve(clanList) })
+  getWeapons() {
     return new Promise((resolve, reject) => {
+      if(Object.keys(weaponList) > 0) return new Promise((resolve, reject) => { resolve(weaponList) })
+
+      db.collection("weapons").get().then((querySnapshot) => {
+        let weapons = {}
+        querySnapshot.forEach((doc) => {
+          let data = doc.data() 
+          weapons[data.name] = data
+        })
+        weaponList = weapons
+        resolve(weapons)
+      })
+    })
+  },
+  getClans() {
+    return new Promise((resolve, reject) => {
+      if(Object.keys(clanList) > 0) return new Promise((resolve, reject) => { resolve(clanList) })
+
       db.collection("clans").get().then((querySnapshot) => {
         let clans = {}
         querySnapshot.forEach((doc) => {

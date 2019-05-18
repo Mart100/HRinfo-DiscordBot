@@ -13,5 +13,8 @@
   },
   "removeclan": {
     "permissions": "ADMINISTRATOR"
+  },
+  "weapon": {
+    "permissions": "all"
   }
 }
