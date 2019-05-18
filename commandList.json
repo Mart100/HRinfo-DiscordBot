@@ -16,5 +16,11 @@
   },
   "weapon": {
     "permissions": "all"
+  },
+  "invite": {
+    "permissions": "all"
+  },
+  "site": {
+    "permissions": "all"
   }
 }

@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const bot = new Discord.Client()
 const env = require('node-env-file')(__dirname + '/.env', {raise: false})
-
+process.env.botperms = Number(process.env.botperms)
 // require scripts
 const commands = require('./scripts/commands.js')
 const database = require('./scripts/database.js')
@@ -12,7 +12,7 @@ database.initialize()
 bot.on('ready', async guild => {
   console.log(bot.user.username + ' is ready!')
   try {
-    let link = await bot.generateInvite([67585])
+    let link = await bot.generateInvite([Number(process.env.botperms)])
     console.log(link)
   } catch (e) {
     console.log(e.stack)

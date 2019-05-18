@@ -9,6 +9,9 @@ module.exports = (message) => {
   **${p}tag** - \`Sets the clan tag\`
   **${p}clan** <tag> - \`Get info about this clan or from other clans\`
   **${p}removeClan** - \`Removes this server from the clan list\`
+  **${p}weapon** <weaponName> \`See information about a specific weapon\`
+  **${p}invite** \`Get an invite link for this bot\`
+  **${p}site** \` Link to the site connected to this bot!\`
   `
   let Embed = new Discord.RichEmbed()
     .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')
