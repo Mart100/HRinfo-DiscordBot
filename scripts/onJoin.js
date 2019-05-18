@@ -23,7 +23,7 @@ module.exports = async (guild) => {
 
 let onJoinText = `
 Thanks for inviting me to your HelmetRoyale clan!
-This clan should be added to https://hrinfo.xyz/clans/ in ~1 minute
+This server should be added as clan to https://hrinfo.xyz/clans/ in ~1 minute
 Type \`${prefix}help\` For more commands of the bot. Such as settings a clan description that will be displayed on the site.
 If you have any questions, Feel free to DM the developer (Marto_0#1978)
 `
