@@ -16,6 +16,7 @@ module.exports = async (message) => {
   database.updateClan(guildID, {name: guild.name})
   database.updateClan(guildID, {image: guild.iconURL})
   database.updateClan(guildID, {desc: 'No description yet...'})
+  database.updateClan(guildID, {tag: 'none'})
 
   // create invite and add to database
   message.channel.createInvite({maxAge: 0, unique: true}).then(invite => database.updateClan(guildID, {invite: invite.code}))
