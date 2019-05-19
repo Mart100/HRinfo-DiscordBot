@@ -6,6 +6,8 @@ module.exports = async (message) => {
   let guild = message.guild
   let guildID = guild.id
 
+  if(await database.isClan(guildID)) return message.channel.send(`This server is already registered as a clan.`)
+
   message.channel.send(text)
 
   database.addClan(guildID)

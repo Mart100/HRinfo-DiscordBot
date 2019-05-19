@@ -6,6 +6,7 @@ process.env.botperms = Number(process.env.botperms)
 const commands = require('./scripts/commands.js')
 const database = require('./scripts/database.js')
 const onJoin = require('./scripts/onJoin.js')
+const onmemberjoin = require('./scripts/onmemberjoin.js')
 
 database.initialize()
 
@@ -21,7 +22,9 @@ bot.on('ready', async guild => {
 })
 
 // on new user joined
-bot.on('guildMemberAdd', async (member) => { database.updateClan(member.guild.id, {memberCount: member.guild.memberCount }) })
+bot.on('guildMemberAdd', async (member) => { 
+  onmemberjoin(member) 
+})
 
 // joined new guild
 bot.on('guildCreate', async (guild) => { onJoin(guild) })

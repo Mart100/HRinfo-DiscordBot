@@ -25,5 +25,17 @@
   },
   "site": {
     "permissions": "all"
+  },
+  "register": {
+    "permissions": "all"
+  },
+  "partners": {
+    "permissions": "all"
+  },
+  "profile": {
+    "permissions": "all"
+  },
+  "givepoints": {
+    "permissions": "all"
   }
 }

@@ -12,7 +12,12 @@ module.exports = async (message) => {
       let clanI = clans[i]
       if(i == args[1] || clanI.name.toLowerCase().includes(args[1]) || clanI.tag.toLowerCase() == args[1]) clan = clanI
     }
-  } else clan = await database.getClan(message.guild.id)
+  } else {
+    if(await database.isClan(message.guild.id)) clan = await database.getClan(message.guild.id)
+    else {
+      return message.channel.send(`This server is not yet registered as a clan. Register with \`${p}registerclan\``)
+    }
+  }
 
   if(clan == undefined) return message.channel.send('Clan not found')
 
