@@ -19,6 +19,7 @@ module.exports = (message) => {
   **${p}register** \` Registers yourself to the database \`
   **${p}setpublic** \` Sets this clan public, So that anyone can join! \`
   **${p}setprivate** \` Sets this clan private, So that noone can join! \`
+  **${p}servers** \` See the current active players in each HR servers \`
   `
   let Embed = new Discord.RichEmbed()
     .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')
