@@ -12,8 +12,6 @@ module.exports = async (message) => {
   if(args[1] != undefined) {
     let playerInput = args[1].replace('<@', '').replace('>', '')
     player = players[playerInput]
-    console.log(players)
-    console.log(playerInput)
   } 
   // own profile
   else {
@@ -29,12 +27,12 @@ module.exports = async (message) => {
   let info = `
   **USER:** ${playerUser.username}
   **POINTS:** ${player.points}
+  **CLAN:** ${player.clan}
   `
   let Embed = new Discord.RichEmbed()
     .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')
     .addField('Profile:', info)
     .setThumbnail(playerUser.image)
     .setColor('#42BEAD')
-    .setFooter('Bot made by Marto_0#1978')
   message.channel.send(Embed)
 }

@@ -32,6 +32,12 @@ module.exports = {
 
   },
   addClan(id) {
+    let obj = {
+      id: id,
+      desc: 'No description yet...',
+      tag: 'none',
+      public: false
+    }
     db.collection('clans').doc(id).set({id: id})
     clanList[id] = {id: id}
   },

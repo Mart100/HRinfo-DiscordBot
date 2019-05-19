@@ -16,6 +16,6 @@ module.exports = async (message) => {
 
   database.updatePlayer(toID, {points: toPlayer.points+pointAmount})
 
-  message.channel.send(`Successfully send ${pointAmount} to <@${toID}>`)
+  message.channel.send(`Successfully gave ${pointAmount} points to <@${toID}>`)
 
 }

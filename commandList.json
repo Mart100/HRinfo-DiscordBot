@@ -37,5 +37,14 @@
   },
   "givepoints": {
     "permissions": "all"
+  },
+  "joinclan": {
+    "permissions": "all"
+  },
+  "setprivate": {
+    "permissions": "ADMINISTRATOR"
+  },
+  "setpublic": {
+    "permissions": "ADMINISTRATOR"
   }
 }
