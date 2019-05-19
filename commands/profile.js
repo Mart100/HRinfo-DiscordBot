@@ -32,7 +32,7 @@ module.exports = async (message) => {
   let Embed = new Discord.RichEmbed()
     .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')
     .addField('Profile:', info)
-    .setThumbnail(playerUser.image)
+    .setThumbnail(playerUser.avatarURL)
     .setColor('#42BEAD')
   message.channel.send(Embed)
 }

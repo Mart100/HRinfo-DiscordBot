@@ -49,5 +49,8 @@
   },
   "servers": {
     "permissions": "all"
+  },
+  "leaderboard": {
+    "permissions": "all"
   }
 }
