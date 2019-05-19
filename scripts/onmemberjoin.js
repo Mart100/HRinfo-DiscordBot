@@ -7,5 +7,5 @@ module.exports = async (member) => {
   database.updateClan(member.guild.id, {memberCount: member.guild.memberCount })
 
   // set player in database
-  if(!await database.isPlayer(message.author.id)) database.addPlayer(member.id)
+  if(!await database.isPlayer(member.id)) database.addPlayer(member.id)
 }
