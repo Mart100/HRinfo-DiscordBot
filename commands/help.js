@@ -14,11 +14,11 @@ module.exports = (message) => {
   **${p}invite** \`Get an invite link for this bot\`
   **${p}site** \` Link to the site connected to this bot!\`
   **${p}partners** \` See all the partners of HRinfo\`
-  **${p}profile <user> \` See your own profile or that of someone else\`
-  **${p}givepoints <user> <amount> \`Give a specified player points\`
-  **${p}register \` Registers yourself to the database \`
-  **${p}setpublic \` Sets this clan public, So that anyone can join! \`
-  **${p}setprivate \` Sets this clan private, So that noone can join! \`
+  **${p}profile** <user> \` See your own profile or that of someone else\`
+  **${p}givepoints** <user> <amount> \`Give a specified player points\`
+  **${p}register** \` Registers yourself to the database \`
+  **${p}setpublic** \` Sets this clan public, So that anyone can join! \`
+  **${p}setprivate** \` Sets this clan private, So that noone can join! \`
   `
   let Embed = new Discord.RichEmbed()
     .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')

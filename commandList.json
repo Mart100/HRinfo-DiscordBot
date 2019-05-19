@@ -46,5 +46,8 @@
   },
   "setpublic": {
     "permissions": "ADMINISTRATOR"
+  },
+  "servers": {
+    "permissions": "all"
   }
 }
