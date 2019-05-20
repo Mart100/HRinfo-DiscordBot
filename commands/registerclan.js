@@ -10,16 +10,16 @@ module.exports = async (message) => {
 
   message.channel.send(text)
 
-  database.addClan(guildID)
+  database.newClan(guildID)
 
   await utils.sleep(5000)
 
-  database.updateClan(guildID, {memberCount: guild.memberCount})
-  database.updateClan(guildID, {name: guild.name})
-  database.updateClan(guildID, {image: guild.iconURL})
+  database.updateClan(guildID, 'memberCount', guild.memberCount)
+  database.updateClan(guildID, 'name', guild.name)
+  database.updateClan(guildID, 'image', guild.iconURL)
 
   // create invite and add to database
-  message.channel.createInvite({maxAge: 0, unique: true}).then(invite => database.updateClan(guildID, {invite: invite.code}))
+  message.channel.createInvite({maxAge: 0, unique: true}).then(invite => database.updateClan(guildID, 'invite', invite.code))
 }
 
 let text = `

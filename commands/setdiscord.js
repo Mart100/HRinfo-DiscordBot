@@ -12,7 +12,7 @@ module.exports = async (message) => {
   // if clan is not in database
   if(!await database.isClan(message.guild.id)) return message.channel.send(`This server is not yet registered as a clan. Register with \`${p}registerclan\``)
 
-  database.updateClan(message.guild.id, {invite: invite})
+  database.updateClan(message.guild.id, 'invite', invite)
 
   message.channel.send('Succesfully edited discord link')
 }

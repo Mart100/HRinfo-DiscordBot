@@ -5,7 +5,10 @@ let weaponList = {}
 let playerList = {}
 
 const utils = require('./utils.js')
+const { URLSearchParams } = require('url')
+const fetch = require('node-fetch')
 const serviceAccount = require("../databaseCredentials.json")
+let HRapiTOKEN = 'aB9gHcoyQkVdCAPnr7xCtl52JXY5rpPY'
 
 module.exports = {
   initialize() {
@@ -23,115 +26,96 @@ module.exports = {
     console.log('Database Initialized')
 
   },
-  async updateClan(id, update) {
-    if(!await this.isClan(id)) return
-    db.collection('clans').doc(id).update(update)
-
-    await utils.sleep(2000)
-    clanList[id] = await this.getClan(id)
-
-  },
-  addClan(id) {
-    let obj = {
-      id: id,
-      desc: 'No description yet...',
-      tag: 'none',
-      public: false
-    }
-    db.collection('clans').doc(id).set({id: id})
-    clanList[id] = {id: id}
-  },
-  removeClan(id) {
-    db.collection('clans').doc(id).delete()
-  },
-  async updatePlayer(id, update) {
-    if(!await this.isPlayer(id)) return
-    db.collection('players').doc(id).update(update)
-
-    await utils.sleep(2000)
-    playerList[id] = await this.getPlayer(id)
-  },
-  addPlayer(user) {
-    let id = user.id
-    let obj = {
-      id: id,
-      clan: "none",
-      points: 0,
-      username: user.username
-      
-    }
-    db.collection('players').doc(id).set(obj)
-    playerList[id] = obj
-  },
+  /*=======================*/
+  /*========WEAPONS========*/
+  /*=======================*/
   getWeapons() {
     return new Promise((resolve, reject) => {
-      if(Object.keys(weaponList) > 0) return new Promise((resolve, reject) => { resolve(weaponList) })
+      fetch('https://hrinfo-api.herokuapp.com/weapons', { method: 'GET'})
+        .then(res => res.json()).then(resolve)
+    })
+  },
 
-      db.collection("weapons").get().then((querySnapshot) => {
-        let weapons = {}
-        querySnapshot.forEach((doc) => {
-          let data = doc.data() 
-          weapons[data.name] = data
-        })
-        weaponList = weapons
-        resolve(weapons)
-      })
-    })
-  },
-  async isPlayer(id) {
-    let players = await this.getPlayers()
-    if(players[id] == undefined) return false
-    else return true
-  },
-  async isClan(id) {
-    let clans = await this.getClans()
-    if(clans[id] == undefined) return false
-    else return true
-  },
-  getPlayer(id) {
-    return new Promise((resolve, reject) => {
-      db.collection('players').doc(id).get().then((snapshot) => {
-        let data = snapshot.data()
-        resolve(data)
-      }).catch(err => console.log('err: ', err))
-    })
-  },
+  /*=======================*/
+  /*========PLAYERS========*/
+  /*=======================*/
   getPlayers() {
     return new Promise((resolve, reject) => {
-      if(Object.keys(playerList) > 0) resolve(playerList)
-
-      db.collection("players").get().then((querySnapshot) => {
-        let players = {}
-        querySnapshot.forEach((doc) => {
-          let data = doc.data() 
-          players[data.id] = data
-        })
-        playerList = players
-        resolve(players)
-      })
+      fetch('https://hrinfo-api.herokuapp.com/players', { method: 'GET'})
+        .then(res => res.json()).then(resolve)
     })
   },
+  getPlayer(id) {
+    return new Promise(async (resolve, reject) => {
+      let players = await this.getPlayers()
+      let player = players[id]
+      resolve(player)
+    })
+  },
+  updatePlayer(id, what, to) {
+    return new Promise((resolve, reject) => {
+      let body = JSON.stringify({token: HRapiTOKEN, id: id, what: what, to: to})
+      let headers = { 'Content-Type': 'application/json' }
+      fetch('https://hrinfo-api.herokuapp.com/updateplayer', { method: 'POST', body: body, headers: headers })
+    })
+  },
+  newPlayer(user) {
+    return new Promise((resolve, reject) => {
+      let body = JSON.stringify({token: HRapiTOKEN, id: id, username: username})
+      let headers = { 'Content-Type': 'application/json' }
+      fetch('https://hrinfo-api.herokuapp.com/newplayer', { method: 'POST', body: body, headers: headers })
+    })
+  },
+  isPlayer(id) {
+    return new Promise(async (resolve, reject) => {
+      let players = await this.getPlayers()
+      if(players[id] == undefined) resolve(false)
+      else resolve(true)
+    })
+  },
+
+  /*=======================*/
+  /*=========CLANS=========*/
+  /*=======================*/
   getClans() {
     return new Promise((resolve, reject) => {
-      if(Object.keys(clanList) > 0) resolve(clanList)
-
-      db.collection("clans").get().then((querySnapshot) => {
-        let clans = {}
-        querySnapshot.forEach((doc) => {
-          let data = doc.data() 
-          clans[data.id] = data
-        })
-        clanList = clans
-        resolve(clans)
-      })
+      fetch('https://hrinfo-api.herokuapp.com/clans', { method: 'GET'})
+        .then(res => res.json()).then(resolve)
     })
   },
   getClan(id) {
+    return new Promise(async (resolve, reject) => {
+      let clans = await this.getClans()
+      let clan = clans[id]
+      resolve(clan)
+    })
+  },
+  updateClan(id, what, to) {
     return new Promise((resolve, reject) => {
-      db.collection('clans').doc(id).get().then((snapshot) => {
-        let data = snapshot.data()
-        resolve(data)
-      }).catch(err => console.log('err: ', err))
+      let body = JSON.stringify({token: HRapiTOKEN, id: id, what: what, to: to})
+      let headers = { 'Content-Type': 'application/json' }
+      fetch('https://hrinfo-api.herokuapp.com/updateclan', { method: 'POST', body: body, headers: headers })
+    })
+  },
+  newClan(id) {
+    return new Promise((resolve, reject) => {
+      let body = JSON.stringify({token: HRapiTOKEN, id: id})
+      let headers = { 'Content-Type': 'application/json' }
+      fetch('https://hrinfo-api.herokuapp.com/newclan', { method: 'POST', body: body, headers: headers })
+    })
+  },
+  deleteClan(id) {
+    return new Promise((resolve, reject) => {
+      let body = JSON.stringify({token: HRapiTOKEN, id: id})
+      let headers = { 'Content-Type': 'application/json' }
+      fetch('https://hrinfo-api.herokuapp.com/deleteclan', { method: 'POST', body: body, headers: headers })
+    })
+  },
+  isClan(id) {
+    return new Promise(async (resolve, reject) => {
+      let clans = await this.getClans()
+      if(clans[id] == undefined) resolve(false)
+      else resolve(true)
     })
   }
 }

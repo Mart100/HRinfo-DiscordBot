@@ -11,6 +11,6 @@ module.exports = async (message) => {
   message.channel.send('Successfully registered!')
 
   // set player in database
-  database.addPlayer(message.author)
+  database.newPlayer(message.author)
 
 }

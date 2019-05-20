@@ -7,7 +7,7 @@ module.exports = async (message) => {
   // if clan is not in database
   if(!await database.isClan(message.guild.id)) return message.channel.send(`This server is not yet registered as a clan. Register with \`${p}registerclan\``)
 
-  database.removeClan(message.guild.id)
+  database.deleteClan(message.guild.id)
   
   message.channel.send(`Successfully removed the clan, If you want to add it back use \`${p}registerclan\``)
 }

@@ -11,7 +11,7 @@ module.exports = async (message) => {
   // if clan is not in database
   if(!await database.isClan(message.guild.id)) return message.channel.send(`This server is not yet registered as a clan. Register with \`${p}registerclan\``)
 
-  database.updateClan(message.guild.id, {public: true})
+  database.updateClan(message.guild.id, 'public', true)
 
   message.channel.send('Succesfully set the clan public!')
 }
