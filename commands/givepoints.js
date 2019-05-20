@@ -11,12 +11,12 @@ module.exports = async (message) => {
   let toID = args[1].replace('<@', '').replace('>', '')
 
   let toPlayer = await database.getPlayer(toID)
-  let toPlayerUser = message.client.users.find((u) => u.id == player.id)
+  let toPlayerUser = message.client.users.find((u) => u.id == toID)
 
   if(toPlayer == undefined) return message.channel.send('Player not found')
 
   database.updatePlayer(toID, 'points', (toPlayer.points+pointAmount))
 
-  message.channel.send(`Successfully gave ${pointAmount} points to **${toPlayerUser.username+'#'+toPlayerUser.discriminator}`)
+  message.channel.send(`Successfully gave ${pointAmount} points to **${toPlayerUser.username+'#'+toPlayerUser.discriminator}**`)
 
 }
