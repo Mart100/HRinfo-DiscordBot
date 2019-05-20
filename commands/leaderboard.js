@@ -19,7 +19,7 @@ module.exports = async (message) => {
     let player = Splayers[i]
     let playerUser = message.client.users.find((u) => u.id == player.id)
     if(playerUser == undefined) playerUser = {username: 'undefined'}
-    leaderBoardText += `\`#${leaderboardIndex+Number(i)+1}\` **${playerUser.username}:** ${player.points}\n`
+    leaderBoardText += `\`#${leaderboardIndex+Number(i)+1}\` **${player.username}:** ${player.points}\n`
   }
 
 

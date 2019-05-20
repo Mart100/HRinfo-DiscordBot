@@ -21,13 +21,19 @@ module.exports = async (message) => {
 
   if(player == undefined) return message.channel.send('Player not found')
 
+  // get player rank
+  let rank = 0
+  let Splayers = Object.values(players).sort((a, b) => b.points-a.points)
+  for(let i in Splayers) if(player.id == Splayers[i].id) rank = i
+
   // get player as user from cache
   let playerUser = message.client.users.find((u) => u.id == player.id)
 
   let info = `
-  **USER:** ${playerUser.username}
-  **POINTS:** ${player.points}
-  **CLAN:** ${player.clan}
+**USER:** ${playerUser.username}
+**POINTS:** ${player.points}
+**CLAN:** ${player.clan}
+**Rank:** #${Number(rank)+1}
   `
   let Embed = new Discord.RichEmbed()
     .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')
