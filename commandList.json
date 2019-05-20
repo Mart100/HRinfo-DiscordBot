@@ -52,5 +52,8 @@
   },
   "leaderboard": {
     "permissions": "all"
+  },
+  "setdiscord": {
+    "permissions": "all"
   }
 }
