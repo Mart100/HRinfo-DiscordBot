@@ -61,7 +61,7 @@ module.exports = {
   },
   newPlayer(user) {
     return new Promise((resolve, reject) => {
-      let body = JSON.stringify({token: HRapiTOKEN, id: id, username: username})
+      let body = JSON.stringify({token: HRapiTOKEN, id: user.id, username: user.username})
       let headers = { 'Content-Type': 'application/json' }
       fetch('https://hrinfo-api.herokuapp.com/newplayer', { method: 'POST', body: body, headers: headers })
     })
