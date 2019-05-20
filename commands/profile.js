@@ -33,7 +33,7 @@ module.exports = async (message) => {
 **USER:** ${playerUser.username}
 **POINTS:** ${player.points}
 **CLAN:** ${player.clan}
-**Rank:** #${Number(rank)+1}
+**RANK:** #${Number(rank)+1}
   `
   let Embed = new Discord.RichEmbed()
     .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')

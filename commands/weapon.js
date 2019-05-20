@@ -29,6 +29,5 @@ module.exports = async (message) => {
     .addField('Info:', info)
     .setThumbnail(weapon.image)
     .setColor('#42BEAD')
-    .setFooter('Bot made by Marto_0#1978')
   message.channel.send(Embed)
 }
