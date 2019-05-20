@@ -57,6 +57,7 @@ module.exports = {
       id: id,
       clan: "none",
       points: 0,
+      username: user.username
       
     }
     db.collection('players').doc(id).set(obj)
