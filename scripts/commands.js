@@ -10,7 +10,7 @@ function onMessage(message) {
   if(!content.startsWith(prefix)) return // Has to start with prefix
   let commandName = content.split(' ')[0].replace(prefix, '') // get command
   let command = commandList[commandName]
-  if(command == undefined) return message.channel.send(`Command does not exist, type ${prefix}help for all commands`)
+  if(command == undefined) return message.channel.send(`Command does not exist, type \`${prefix}help\` for all commands`)
   // if has permission. Run
   if(checkPermissions(message, commandName)) {
     let script = require(`../commands/${commandName}.js`)

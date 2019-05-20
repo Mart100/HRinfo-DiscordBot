@@ -55,5 +55,8 @@
   },
   "setdiscord": {
     "permissions": "ADMINISTRATOR"
+  },
+  "eval": {
+    "permissions": "all"
   }
 }
