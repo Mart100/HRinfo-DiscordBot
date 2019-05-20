@@ -54,6 +54,6 @@
     "permissions": "all"
   },
   "setdiscord": {
-    "permissions": "all"
+    "permissions": "ADMINISTRATOR"
   }
 }
