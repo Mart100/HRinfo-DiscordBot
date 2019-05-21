@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const database = require('../scripts/database.js')
+const utils = require('../scripts/utils.js')
 
 module.exports = async (message) => {
   let p = process.env.prefix
@@ -8,10 +9,7 @@ module.exports = async (message) => {
   let args = message.content.toLowerCase().split(' ')
 
   if(args[1] != undefined) {
-    for(let i in clans) {
-      let clanI = clans[i]
-      if(i == args[1] || clanI.name.toLowerCase().includes(args[1]) || clanI.tag.toLowerCase() == args[1]) clan = clanI
-    }
+    clan = utils.getClanByText(args[1], clans)
   } else {
     if(await database.isClan(message.guild.id)) clan = await database.getClan(message.guild.id)
     else {
