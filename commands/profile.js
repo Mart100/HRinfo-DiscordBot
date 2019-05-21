@@ -31,6 +31,7 @@ module.exports = async (message) => {
 
   let info = `
 **USER:** ${playerUser.username}
+**DIVISION:** ${player.division}
 **POINTS:** ${player.points}
 **CLAN:** ${player.clan}
 **RANK:** #${Number(rank)+1}
