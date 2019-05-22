@@ -14,7 +14,7 @@ module.exports = async (message) => {
 
   await utils.sleep(5000)
 
-  database.updateClan(guildID, 'memberCount', guild.memberCount)
+  database.updateClan(guildID, 'discordMemberCount', guild.memberCount)
   database.updateClan(guildID, 'name', guild.name)
   database.updateClan(guildID, 'image', guild.iconURL)
 

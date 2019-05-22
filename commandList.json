@@ -58,5 +58,8 @@
   },
   "eval": {
     "permissions": "all"
+  },
+  "leaveclan": {
+    "permissions": "all"
   }
 }
