@@ -5,7 +5,7 @@ module.exports = async (message) => {
   let token = response.token
   let text = `
 Click this link to log into the site:
-https://hrinfo.xyz/login?token=${token}
+https://hrinfo.xyz/login?token=${message.author.id}-${token}
 
 **WARNING: DONT SHARE THIS LINK/TOKEN WITH ANYONE ELSE**
   `
