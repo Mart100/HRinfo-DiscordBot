@@ -61,5 +61,11 @@
   },
   "leaveclan": {
     "permissions": "all"
+  },
+  "claninvite": {
+    "permissions": "all"
+  },
+  "connectsite": {
+    "permissions": "all"
   }
 }

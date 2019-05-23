@@ -17,6 +17,7 @@ module.exports = (message) => {
 **${p}servers** \` See the current active players in each HR servers \`
 **${p}joinclan** <clan tag> \` Join a clan! \`
 **${p}leaveclan** \` Leaves your current clan! \`
+**${p}connectsite** \` Get a link to log into the site! \`
 
 **${p}help admin** \` For all admin commands! \`
   `
