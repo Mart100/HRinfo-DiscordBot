@@ -23,7 +23,7 @@ module.exports = async (message) => {
 
   if(clan.public != true) return message.channel.send('This clan is not public, Ask one of the moderators to join.')
 
-  database.updatePlayer(message.author.id, 'clan', clan.name)
+  database.updatePlayer(message.author.id, 'clan', clan.id)
 
   message.channel.send(`Successfully joined ${clan.name}`)
 }

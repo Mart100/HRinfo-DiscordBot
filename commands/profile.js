@@ -5,6 +5,7 @@ module.exports = async (message) => {
   let p = process.env.prefix
   let player
   let players = await database.getPlayers()
+  let clans = await database.getClans()
   let args = message.content.toLowerCase().split(' ')
 
 
@@ -33,7 +34,7 @@ module.exports = async (message) => {
 **USER:** ${playerUser.username}
 **DIVISION:** ${player.division}
 **POINTS:** ${player.points}
-**CLAN:** ${player.clan}
+**CLAN:** ${clans[player.clan].name}
 **RANK:** #${Number(rank)+1}
   `
   let Embed = new Discord.RichEmbed()
