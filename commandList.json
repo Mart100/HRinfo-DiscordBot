@@ -1,11 +1,14 @@
 {
-  "setdesc": { 
+  "setclandesc": { 
     "permissions": "ADMINISTRATOR"
   },
   "help": {
     "permissions": "all"
   },
-  "tag": {
+  "setclantag": {
+    "permissions": "ADMINISTRATOR"
+  },
+  "setclanname": {
     "permissions": "ADMINISTRATOR"
   },
   "clan": {
@@ -41,10 +44,10 @@
   "joinclan": {
     "permissions": "all"
   },
-  "setprivate": {
+  "setclanprivate": {
     "permissions": "ADMINISTRATOR"
   },
-  "setpublic": {
+  "setclanpublic": {
     "permissions": "ADMINISTRATOR"
   },
   "servers": {
@@ -53,7 +56,7 @@
   "leaderboard": {
     "permissions": "all"
   },
-  "setdiscord": {
+  "setclandiscord": {
     "permissions": "ADMINISTRATOR"
   },
   "eval": {
@@ -62,7 +65,7 @@
   "leaveclan": {
     "permissions": "all"
   },
-  "claninvite": {
+  "setclaninvite": {
     "permissions": "all"
   },
   "connectsite": {

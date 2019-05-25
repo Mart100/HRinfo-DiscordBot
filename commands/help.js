@@ -23,13 +23,14 @@ module.exports = (message) => {
   `
 
   let adminCommands = `
-**${p}setpublic** \` Sets this clan public, So that anyone can join! \`
-**${p}setprivate** \` Sets this clan private, So that noone can join! \`
-**${p}removeclan** - \`Removes this server from the clan list\`
 **${p}registerclan** - \`Registers this server as a clan, And puts it on the hrinfo site\`
-**${p}setdesc** - \`Sets the description of the clan\`
-**${p}tag** - \`Sets the clan tag\`
-**${p}setdiscord** - \`Sets the discord invite link. Set it to \`**none**\` to have no invite.\`
+**${p}removeclan** - \`Removes this server from the clan list\`
+**${p}setclanpublic** \` Sets this clan public, So that anyone can join! \`
+**${p}setclanprivate** \` Sets this clan private, So that noone can join! \`
+**${p}setclandesc <desc>** - \`Sets the description of the clan\`
+**${p}setclantag <tag>** - \`Sets the clan tag\`
+**${p}setclanname** <name> - \`Sets the clan name\`
+**${p}setclandiscord <invite code>** - \`Sets the discord invite link. Set it to \`**none**\` to have no invite.\`
 **${p}claninvite** <mention> - \`Invite someone to your clan.\`
 
   `
