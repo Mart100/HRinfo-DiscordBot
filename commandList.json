@@ -70,5 +70,8 @@
   },
   "connectsite": {
     "permissions": "all"
+  },
+  "connectgame": {
+    "permissions": "all"
   }
 }

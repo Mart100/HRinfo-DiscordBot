@@ -30,11 +30,15 @@ module.exports = async (message) => {
   // get player as user from cache
   let playerUser = message.client.users.find((u) => u.id == player.id)
 
+  let playerClan = clans[player.clan]
+  let clanname = 'none'
+  if(playerClan != undefined) clanname = playerClan.name
+
   let info = `
 **USER:** ${playerUser.username}
 **DIVISION:** ${player.division}
 **POINTS:** ${player.points}
-**CLAN:** ${clans[player.clan].name}
+**CLAN:** ${clanname}
 **RANK:** #${Number(rank)+1}
   `
   let Embed = new Discord.RichEmbed()
