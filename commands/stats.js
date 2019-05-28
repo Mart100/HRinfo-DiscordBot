@@ -24,8 +24,8 @@ module.exports = async (message) => {
   if(player == undefined) return message.channel.send('Player not found')
 
   // get player stats
+  if(player.gameID == undefined) return message.channel.send(`**${player.username}** Has not connected his game. Connect with \`${p}connectgame\``)
   let playerStats = await HRapi.getUserStats(player.gameID)
-  if(playerStats == undefined) return message.channel.send(`**${player.username}** Has not connected his game. Connect with \`${p}connectgame\``)
 
   // get player as user from cache
   let playerUser = message.client.users.find((u) => u.id == player.id)
