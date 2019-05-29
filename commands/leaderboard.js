@@ -60,6 +60,11 @@ async function leaderboardCasual(message) {
   if(args[2] != undefined) time = args[2]
   if(args[3] != undefined) what = args[3]
 
+  if(what == 'mostkills') what = 'mostKills'
+  if(what == 'mostdamage') what = 'mostDamage'
+  if(what == 'totalwins') what = 'totalWins'
+  if(what == 'totalkills') what = 'totalKills'
+
   let LBdata = await HRapi.getLeaderboard(time, what)
 
   if(LBdata == undefined) return message.channel.send('Something went wrong :(')
