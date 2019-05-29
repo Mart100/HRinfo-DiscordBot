@@ -1,12 +1,32 @@
 const Discord = require('discord.js')
 const database = require('../scripts/database.js')
+const HRapi = require('../scripts/HRapi.js')
+
 
 module.exports = async (message) => {
   let p = process.env.prefix
-  let players = await database.getPlayers()
   let args = message.content.toLowerCase().split(' ')
+
+  if(args[1] == 'comp') leaderboardComp(message)
+  else if(args[1] == 'casual') leaderboardCasual(message)
+
+  else {
+    let Embed = new Discord.RichEmbed()
+      .addField(`${p}leaderboard comp`, `See the competitive leaderboard!`)
+      .addField(`${p}leaderboard casual`, `See the casual leaderboard!`)
+      .setColor('#42BEAD')
+      .addField(`full leaderboard at`, 'https://hrinfo.xyz/leaderboard')
+    message.channel.send(Embed)
+    return
+  }
+}
+
+
+async function leaderboardComp(message) {
+  let args = message.content.toLowerCase().split(' ')
+  let players = await database.getPlayers()
   let page = 0
-  if(args[1] != undefined) page = Number(args[1])-1
+  if(args[2] != undefined) page = Number(args[2])-1
 
   let leaderboardIndex = page*10
   let leaderBoardText = ''
@@ -25,6 +45,42 @@ module.exports = async (message) => {
 
   // send Embed
   let Embed = new Discord.RichEmbed()
+    .addField('Leaderboard:', leaderBoardText)
+    .setColor('#42BEAD')
+    .setFooter(`page ${page+1}`)
+  message.channel.send(Embed)
+}
+
+async function leaderboardCasual(message) {
+  let args = message.content.toLowerCase().split(' ')
+  let time = 'daily'
+  let what = 'mostKills'
+  let leaderBoardText = ''
+  let page = 0
+
+  if(args[2] != undefined) page = Number(args[2])-1
+
+  let leaderboardIndex = page*10
+
+  let LBdata = await HRapi.getLeaderboard(time, what)
+
+  LBdata = LBdata.slice(leaderboardIndex, leaderboardIndex+10)
+
+  // add to text
+  for(let i in LBdata) {
+    let player = LBdata[i]
+    leaderBoardText += `\`#${leaderboardIndex+Number(i)+1}\` **${player.name}:** ${player.score}\n`
+  }
+
+
+  let infoField = `
+  **Time:** ${time}
+  **What:** ${what}
+  `
+
+  // send Embed
+  let Embed = new Discord.RichEmbed()
+    .addField('Info:', infoField)
     .addField('Leaderboard:', leaderBoardText)
     .setColor('#42BEAD')
     .setFooter(`page ${page+1}`)
