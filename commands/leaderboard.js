@@ -56,22 +56,20 @@ async function leaderboardCasual(message) {
   let time = 'daily'
   let what = 'mostKills'
   let leaderBoardText = ''
-  let page = 0
 
-  if(args[2] != undefined) page = Number(args[2])-1
-
-  let leaderboardIndex = page*10
+  if(args[2] != undefined) time = args[2]
+  if(args[3] != undefined) what = args[3]
 
   let LBdata = await HRapi.getLeaderboard(time, what)
 
   if(LBdata == undefined) return message.channel.send('Something went wrong :(')
 
-  LBdata = LBdata.slice(leaderboardIndex, leaderboardIndex+10)
+  LBdata = LBdata.slice(0, 10)
 
   // add to text
   for(let i in LBdata) {
     let player = LBdata[i]
-    leaderBoardText += `\`#${leaderboardIndex+Number(i)+1}\` **${player.name}:** ${player.score}\n`
+    leaderBoardText += `\`#${Number(i)+1}\` **${player.name}:** ${player.score}\n`
   }
 
 
@@ -85,6 +83,5 @@ async function leaderboardCasual(message) {
     .addField('Info:', infoField)
     .addField('Leaderboard:', leaderBoardText)
     .setColor('#42BEAD')
-    .setFooter(`page ${page+1}`)
   message.channel.send(Embed)
 }
