@@ -1,6 +1,6 @@
 const utils = require('../scripts/utils.js')
 const database = require('../scripts/database.js')
-const prefix = process.env.prefix
+const p = process.env.prefix
 
 module.exports = async (message) => {
   let guild = message.guild
@@ -25,5 +25,7 @@ module.exports = async (message) => {
 let text = `
 This server is now registered as clan!
 This server should be added as clan to https://hrinfo.xyz/clans/ in ~1 minute
-Type \`${prefix}help\` For more commands of the bot. Such as setting a clan description that will be displayed on the site.
+After any discord administrator has set the clan to public with \`${p}setclanpublic\`. 
+Others can join the clan using \`${p}joinclan <clan TAG>\`
+Type \`${p}help\` For more commands of the bot. Such as setting a clan description that will be displayed on the site.
 `
