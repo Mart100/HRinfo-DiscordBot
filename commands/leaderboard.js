@@ -65,7 +65,6 @@ async function leaderboardCasual(message) {
   let LBdata = await HRapi.getLeaderboard(time, what)
 
   if(LBdata == undefined) return message.channel.send('Something went wrong :(')
-  console.log(LBdata)
 
   LBdata = LBdata.slice(leaderboardIndex, leaderboardIndex+10)
 
