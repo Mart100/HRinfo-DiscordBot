@@ -21,7 +21,8 @@ module.exports = async (message) => {
 
   let info = `
   **TAG:** ${clan.tag}
-  **MemberCount:** ${clan.memberCount}
+  **Members:** ${clan.members.length}
+  **DiscordMemberCount:** ${clan.discordMemberCount}
   **Discord:** https://discord.gg/${clan.invite}
   `
   let Embed = new Discord.RichEmbed()

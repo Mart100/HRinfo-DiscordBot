@@ -4,6 +4,7 @@ const utils = require('../scripts/utils.js')
 module.exports = async (message) => {
   let p = process.env.prefix
   let player = await database.getPlayer(message.author.id)
+  let clans = await database.getClans()
   let oldPlayerClan = player.clan
   let args = message.content.toLowerCase().split(' ')
 
@@ -11,5 +12,5 @@ module.exports = async (message) => {
 
   database.updatePlayer(message.author.id, 'clan', 'none')
 
-  message.channel.send(`Successfully left ${oldPlayerClan}`)
+  message.channel.send(`Successfully left **${clans[oldPlayerClan].name}**`)
 }
