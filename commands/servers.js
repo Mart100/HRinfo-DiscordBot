@@ -29,6 +29,8 @@ module.exports = async (message) => {
 **US:** \`${usCount}\`
 **South America:** \`${saCount}\`
 **Asia:** \`${asCount}\`
+
+**More detailed info:** https://hrinfo.xyz/playingcount/
   `)
 
     
