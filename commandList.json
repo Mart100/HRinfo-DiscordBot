@@ -54,7 +54,8 @@
     "permissions": "all"
   },
   "leaderboard": {
-    "permissions": "all"
+    "permissions": "all",
+    "aliases": ["lb"]
   },
   "setclandiscord": {
     "permissions": "ADMINISTRATOR"
@@ -75,6 +76,9 @@
     "permissions": "all"
   },
   "stats": {
+    "permissions": "all"
+  },
+  "hrinfostats": {
     "permissions": "all"
   }
 }

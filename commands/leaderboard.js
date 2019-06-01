@@ -12,8 +12,8 @@ module.exports = async (message) => {
 
   else {
     let Embed = new Discord.RichEmbed()
-      .addField(`${p}leaderboard comp`, `See the competitive leaderboard!`)
-      .addField(`${p}leaderboard casual`, `See the casual leaderboard!`)
+      .addField(`${p}lb comp`, `See the competitive leaderboard!`)
+      .addField(`${p}lb casual`, `See the casual leaderboard!`)
       .setColor('#42BEAD')
       .addField(`full leaderboard at`, 'https://hrinfo.xyz/leaderboard')
     message.channel.send(Embed)

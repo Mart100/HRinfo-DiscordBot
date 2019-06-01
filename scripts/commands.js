@@ -9,8 +9,22 @@ function onMessage(message) {
   let content = message.content.toLowerCase()
   if(!content.startsWith(prefix)) return // Has to start with prefix
   let commandName = content.split(' ')[0].replace(prefix, '') // get command
+  if(commandName == '') return
   let command = commandList[commandName]
-  if(command == undefined) return message.channel.send(`Command does not exist, type \`${prefix}help\` for all commands`)
+  if(command == undefined) {
+    // search for aliases
+    for(let commandKey in commandList) {
+      if(commandList[commandKey].aliases == undefined) continue
+      for(let alias of commandList[commandKey].aliases) {
+        console.log(alias)
+        if(alias == commandName) {
+          commandName = commandKey
+          command = commandList[commandKey]
+        }
+      }
+    }
+    if(command == undefined) return message.channel.send(`Command does not exist, type \`${prefix}help\` for all commands`)
+  }
   // if has permission. Run
   if(checkPermissions(message, commandName)) {
     let script = require(`../commands/${commandName}.js`)
