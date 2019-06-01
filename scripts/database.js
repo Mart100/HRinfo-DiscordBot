@@ -54,10 +54,9 @@ module.exports = {
   },
   getPlayerToken(id) {
     return new Promise((resolve, reject) => {
-      let body = JSON.stringify({token: HRapiTOKEN, id: id})
       let headers = { 'Content-Type': 'application/json' }
-      fetch('https://hrinfo-api.herokuapp.com/playertoken', { method: 'POST', body: body, headers: headers })
-        .then(res => res.json()).then(resolve)
+      fetch(`https://hrinfo-api.herokuapp.com/playertoken?token=${HRapiTOKEN}&id=${id}`)
+        .then(res => res.text()).then(resolve)
     })
   },
   updatePlayer(id, what, to) {
@@ -124,6 +123,34 @@ module.exports = {
       let clans = await this.getClans()
       if(clans[id] == undefined) resolve(false)
       else resolve(true)
+    })
+  },
+
+  /*=============================*/
+  /*=========TOURNAMENTS=========*/
+  /*=============================*/
+  getTournaments() {
+    return new Promise((resolve, reject) => {
+      fetch('https://hrinfo-api.herokuapp.com/tournaments', { method: 'GET'})
+        .then(res => res.json()).then(resolve)
+    })
+  },
+  updateTournament(id, what, to) {
+    return new Promise((resolve, reject) => {
+      fetch(`https://hrinfo-api.herokuapp.com/updatetournament?token=${HRapiTOKEN}&id=${id}&what=${what}&to=${to}`)
+        .then(res => res.text()).then(resolve)
+    })
+  },
+  joinTournament(id, token) {
+    return new Promise((resolve, reject) => {
+      fetch(`https://hrinfo-api.herokuapp.com/jointournament?id=${id}&token=${token}`)
+        .then(res => res.text()).then(resolve)
+    })
+  },
+  newTournament(name) {
+    return new Promise((resolve, reject) => {
+      fetch(`https://hrinfo-api.herokuapp.com/newtournament?name=${name}&token=${HRapiTOKEN}`)
+        .then(res => res.json()).then(resolve)
     })
   }
 }

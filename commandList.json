@@ -80,5 +80,11 @@
   },
   "hrinfostats": {
     "permissions": "all"
+  },
+  "tournaments": {
+    "permissions": "all"
+  },
+  "tournament": {
+    "permissions": "all"
   }
 }

@@ -16,7 +16,6 @@ function onMessage(message) {
     for(let commandKey in commandList) {
       if(commandList[commandKey].aliases == undefined) continue
       for(let alias of commandList[commandKey].aliases) {
-        console.log(alias)
         if(alias == commandName) {
           commandName = commandKey
           command = commandList[commandKey]
