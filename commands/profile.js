@@ -40,6 +40,8 @@ module.exports = async (message) => {
 **POINTS:** ${player.points}
 **CLAN:** ${clanname}
 **RANK:** #${Number(rank)+1}
+**MORE DETAILED INFO:** 
+https://hrinfo.xyz/profile/?player=${message.author.id}
   `
   let Embed = new Discord.RichEmbed()
     .setAuthor('HRinfo', 'https://i.imgur.com/yUVsTLb.png')
