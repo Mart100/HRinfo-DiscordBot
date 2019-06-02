@@ -10,7 +10,7 @@ module.exports = async (message) => {
 
   for(let tournamentID in tournaments) {
     let tournament = tournaments[tournamentID]
-    tournamentsField += `**${tournament.name}**`
+    tournamentsField += `**${tournament.name}**\n`
   }
 
   let Embed = new Discord.RichEmbed()

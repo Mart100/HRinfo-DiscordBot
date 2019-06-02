@@ -148,6 +148,12 @@ module.exports = {
         .then(res => res.text()).then(resolve)
     })
   },
+  startTournament(id) {
+    return new Promise((resolve, reject) => {
+      fetch(`${url}/starttournament?id=${id}&token=${HRapiTOKEN}`)
+        .then(res => res.text()).then(resolve)
+    })
+  },
   newTournament(name) {
     return new Promise((resolve, reject) => {
       fetch(`${url}/newtournament?name=${name}&token=${HRapiTOKEN}`)
