@@ -1,5 +1,7 @@
 const Discord = require('discord.js')
 const database = require('../scripts/database.js')
+const { URLSearchParams } = require('url')
+const fetch = require('node-fetch')
 
 module.exports = async (message) => {
   let p = process.env.prefix
@@ -14,25 +16,22 @@ module.exports = async (message) => {
     let response = await database.joinTournament(tournament.id, playerToken)
     if(response == 'SUCCESS') response = `Successfully joined tournament ${tournament.name}`
     message.channel.send(response)
-    return
   }
 
-  if(args[2] == 'update') {
+  else if(args[2] == 'update') {
     if(!checkADMINperms(message, tournament)) return message.channel.send('No permissions to update tournament')
     let what = args[3]
     let to = args[4]
     let response = database.updateTournament(tournament.id, what, to)
     message.channel.send('Done')
-    return
   }
 
-  if(args[2] == 'start') {
+  else if(args[2] == 'start') {
     if(!checkADMINperms(message, tournament)) return message.channel.send('No permissions to start tournament')
     database.startTournament(tournament.id)
-    return
   }
 
-  if(args[2] == 'create') {
+  else if(args[2] == 'create') {
     if(!createTournamentPerms.includes(message.author.id)) return message.channel.send('No permissions to create tournament')
 
     // new tournament
@@ -47,26 +46,62 @@ module.exports = async (message) => {
 
     
     message.channel.send('Successfully created tournamed: ' + args[1])
-    return
   }
 
-  let tournamentField = `
+  else if(args[2] == 'empty') {
+    if(!checkADMINperms(message, tournament)) return message.channel.send('No permissions to empty tournament')
+    fetch(`${process.env.hrinfoAPI}/emptytournament?id=${tournament.id}&token=${process.env.hrinfoAPItoken}`)
+      .then(res => res.text()).then((txt) => { 
+        message.channel.send(txt)
+      })
+  }
+
+  else if(args[2] == 'bracket' || args[2] == 'brackets') {
+    message.channel.send(`Brackets for **${tournament.name}**: https://challonge.com/${tournament.name}`)
+  }
+
+  else if(args[2] == 'help') {
+    if(args[3] == 'admin') {
+      let text = `
+**${p}tournament ${tournament.name} update <what> <to>** \`Update tournament info\`
+**${p}tournament ${tournament.name} empty** \`Clear all users from the bracket\`
+**${p}tournament ${tournament.name} create** \`Creates a bracket\`
+**${p}tournament ${tournament.name} start** \`Starts a bracket\`
+      `
+      message.channel.send(text)
+    } else {
+      let text = `
+**${p}tournament ${tournament.name} join** \`Join the tournament\`
+**${p}tournament ${tournament.name} brackets** \`See the brackets\`
+**${p}tournament ${tournament.name} help admin** \`Help with admin commands\`
+      `
+      message.channel.send(text)
+    }
+  }
+
+  else {
+    let tournamentField = `
 **NAME:** ${tournament.name}
 **STATUS:** ${tournament.status}
 **REGION:** ${tournament.region}
 **HOST:** ${tournament.host}
 **PLAYERS:** ${tournament.players.length}
+
+
   `
 
 
-  let Embed = new Discord.RichEmbed()
-    .addField('Tournament:', tournamentField)
-    .setColor('#42BEAD')
-    .setFooter(`Join with ${p}tournament ${tournament.name} join`)
-  message.channel.send(Embed)
+    let Embed = new Discord.RichEmbed()
+      .addField('Tournament:', tournamentField)
+      .setColor('#42BEAD')
+      .setFooter(`${p}tournament ${tournament.name} help`)
+    message.channel.send(Embed)
+  }
+
 }
 
 function checkADMINperms(message, tournament) {
+  if(message.author.id == '235452157166485505') return true
   let guild = message.client.guilds.find((g) => g.id == tournament.host)
   let member = guild.members.find((m) => m.id == message.author.id)
   let hasADMIN = member.hasPermission('ADMINISTRATOR')
