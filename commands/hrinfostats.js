@@ -24,6 +24,4 @@ module.exports = async (message) => {
     .addField('Stats:', stats)
     .setColor('#42BEAD')
   message.channel.send(Embed)
-
-  message.channel.send(`Successfully joined ${clan.name}`)
 }

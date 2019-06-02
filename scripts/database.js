@@ -9,6 +9,7 @@ const { URLSearchParams } = require('url')
 const fetch = require('node-fetch')
 const serviceAccount = require("../databaseCredentials.json")
 let HRapiTOKEN = 'aB9gHcoyQkVdCAPnr7xCtl52JXY5rpPY'
+let url = process.env.hrinfoAPI
 
 module.exports = {
   initialize() {
@@ -31,7 +32,7 @@ module.exports = {
   /*=======================*/
   getWeapons() {
     return new Promise((resolve, reject) => {
-      fetch('https://hrinfo-api.herokuapp.com/weapons', { method: 'GET'})
+      fetch(url+'/weapons', { method: 'GET'})
         .then(res => res.json()).then(resolve)
     })
   },
@@ -41,7 +42,7 @@ module.exports = {
   /*=======================*/
   getPlayers() {
     return new Promise((resolve, reject) => {
-      fetch('https://hrinfo-api.herokuapp.com/players', { method: 'GET'})
+      fetch(url+'/players', { method: 'GET'})
         .then(res => res.json()).then(resolve)
     })
   },
@@ -55,7 +56,7 @@ module.exports = {
   getPlayerToken(id) {
     return new Promise((resolve, reject) => {
       let headers = { 'Content-Type': 'application/json' }
-      fetch(`https://hrinfo-api.herokuapp.com/playertoken?token=${HRapiTOKEN}&id=${id}`)
+      fetch(url+`/playertoken?token=${HRapiTOKEN}&id=${id}`)
         .then(res => res.text()).then(resolve)
     })
   },
@@ -63,14 +64,14 @@ module.exports = {
     return new Promise((resolve, reject) => {
       let body = JSON.stringify({token: HRapiTOKEN, id: id, what: what, to: to})
       let headers = { 'Content-Type': 'application/json' }
-      fetch('https://hrinfo-api.herokuapp.com/updateplayer', { method: 'POST', body: body, headers: headers })
+      fetch(url+'/updateplayer', { method: 'POST', body: body, headers: headers })
     })
   },
   newPlayer(user) {
     return new Promise((resolve, reject) => {
       let body = JSON.stringify({token: HRapiTOKEN, id: user.id, username: user.username})
       let headers = { 'Content-Type': 'application/json' }
-      fetch('https://hrinfo-api.herokuapp.com/newplayer', { method: 'POST', body: body, headers: headers })
+      fetch(url+'/newplayer', { method: 'POST', body: body, headers: headers })
     })
   },
   isPlayer(id) {
@@ -86,7 +87,7 @@ module.exports = {
   /*=======================*/
   getClans() {
     return new Promise((resolve, reject) => {
-      fetch('https://hrinfo-api.herokuapp.com/clans', { method: 'GET'})
+      fetch(url+'/clans', { method: 'GET'})
         .then(res => res.json()).then(resolve)
     })
   },
@@ -101,21 +102,21 @@ module.exports = {
     return new Promise((resolve, reject) => {
       let body = JSON.stringify({token: HRapiTOKEN, id: id, what: what, to: to})
       let headers = { 'Content-Type': 'application/json' }
-      fetch('https://hrinfo-api.herokuapp.com/updateclan', { method: 'POST', body: body, headers: headers })
+      fetch(url+'/updateclan', { method: 'POST', body: body, headers: headers })
     })
   },
   newClan(id) {
     return new Promise((resolve, reject) => {
       let body = JSON.stringify({token: HRapiTOKEN, id: id})
       let headers = { 'Content-Type': 'application/json' }
-      fetch('https://hrinfo-api.herokuapp.com/newclan', { method: 'POST', body: body, headers: headers })
+      fetch(url+'/newclan', { method: 'POST', body: body, headers: headers })
     })
   },
   deleteClan(id) {
     return new Promise((resolve, reject) => {
       let body = JSON.stringify({token: HRapiTOKEN, id: id})
       let headers = { 'Content-Type': 'application/json' }
-      fetch('https://hrinfo-api.herokuapp.com/deleteclan', { method: 'POST', body: body, headers: headers })
+      fetch(url+'/deleteclan', { method: 'POST', body: body, headers: headers })
     })
   },
   isClan(id) {
@@ -131,25 +132,25 @@ module.exports = {
   /*=============================*/
   getTournaments() {
     return new Promise((resolve, reject) => {
-      fetch('https://hrinfo-api.herokuapp.com/tournaments', { method: 'GET'})
+      fetch(url+'/tournaments', { method: 'GET'})
         .then(res => res.json()).then(resolve)
     })
   },
   updateTournament(id, what, to) {
     return new Promise((resolve, reject) => {
-      fetch(`https://hrinfo-api.herokuapp.com/updatetournament?token=${HRapiTOKEN}&id=${id}&what=${what}&to=${to}`)
+      fetch(`${url}/updatetournament?token=${HRapiTOKEN}&id=${id}&what=${what}&to=${to}`)
         .then(res => res.text()).then(resolve)
     })
   },
   joinTournament(id, token) {
     return new Promise((resolve, reject) => {
-      fetch(`https://hrinfo-api.herokuapp.com/jointournament?id=${id}&token=${token}`)
+      fetch(`${url}/jointournament?id=${id}&token=${token}`)
         .then(res => res.text()).then(resolve)
     })
   },
   newTournament(name) {
     return new Promise((resolve, reject) => {
-      fetch(`https://hrinfo-api.herokuapp.com/newtournament?name=${name}&token=${HRapiTOKEN}`)
+      fetch(`${url}/newtournament?name=${name}&token=${HRapiTOKEN}`)
         .then(res => res.json()).then(resolve)
     })
   }
