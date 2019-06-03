@@ -183,5 +183,7 @@ function checkADMINperms(message, tournament) {
 
 let createTournamentPerms = [
   '235452157166485505',
-  '361632963101851660'
+  '361632963101851660',
+  '276053074295128074',
+  '532333562473611296'
 ]
