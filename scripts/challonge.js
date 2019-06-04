@@ -4,12 +4,14 @@ let apiKEY = 'HHxb5sEy8p13dX0jzjJujYLHQfi6QG1QJEA3YnKJ'
 
 module.exports = {
   getMatches(id) {
-    let url = new URL(`https://api.challonge.com/v1/tournaments/${id}/matches.json`)
-    let params = {
-      "api_key": apiKEY,
-    }
-    url.search = new URLSearchParams(params)
-    fetch(url, {method:'GET'}).then(res => res.json()).then(json => resolve(json))
+    return new Promise((resolve, reject) => {
+      let url = new URL(`https://api.challonge.com/v1/tournaments/${id}/matches.json`)
+      let params = {
+        "api_key": apiKEY,
+      }
+      url.search = new URLSearchParams(params)
+      fetch(url, {method:'GET'}).then(res => res.json()).then(json => resolve(json))
+    })
   },
   getCurrentPlayerMatch(tournament, playerID) {
     return new Promise((resolve, reject) => {

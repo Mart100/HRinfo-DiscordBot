@@ -70,7 +70,6 @@ async function doCoinFlips() {
   for(let tournamentID in tournaments) {
     let tournament = tournaments[tournamentID]
     let matches = await challonge.getMatches(tournament.name)
-    
     // loop trough matches
     for(let match of matches) {
       match = match.match

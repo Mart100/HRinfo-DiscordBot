@@ -1,7 +1,7 @@
 const utils = require('./utils.js')
 const { URLSearchParams } = require('url')
 const fetch = require('node-fetch')
-let HRapiTOKEN = 'aB9gHcoyQkVdCAPnr7xCtl52JXY5rpPY'
+let apiKEY = 'aB9gHcoyQkVdCAPnr7xCtl52JXY5rpPY'
 let url = process.env.hrinfoAPI
 
 module.exports = {
@@ -34,20 +34,20 @@ module.exports = {
   getPlayerToken(id) {
     return new Promise((resolve, reject) => {
       let headers = { 'Content-Type': 'application/json' }
-      fetch(url+`/playertoken?token=${HRapiTOKEN}&id=${id}`)
+      fetch(url+`/playertoken?token=${apiKEY}&id=${id}`)
         .then(res => res.text()).then(resolve)
     })
   },
   updatePlayer(id, what, to) {
     return new Promise((resolve, reject) => {
-      let body = JSON.stringify({token: HRapiTOKEN, id: id, what: what, to: to})
+      let body = JSON.stringify({token: apiKEY, id: id, what: what, to: to})
       let headers = { 'Content-Type': 'application/json' }
       fetch(url+'/updateplayer', { method: 'POST', body: body, headers: headers })
     })
   },
   newPlayer(user) {
     return new Promise((resolve, reject) => {
-      let body = JSON.stringify({token: HRapiTOKEN, id: user.id, username: user.username})
+      let body = JSON.stringify({token: apiKEY, id: user.id, username: user.username})
       let headers = { 'Content-Type': 'application/json' }
       fetch(url+'/newplayer', { method: 'POST', body: body, headers: headers })
     })
@@ -78,21 +78,21 @@ module.exports = {
   },
   updateClan(id, what, to) {
     return new Promise((resolve, reject) => {
-      let body = JSON.stringify({token: HRapiTOKEN, id: id, what: what, to: to})
+      let body = JSON.stringify({token: apiKEY, id: id, what: what, to: to})
       let headers = { 'Content-Type': 'application/json' }
       fetch(url+'/updateclan', { method: 'POST', body: body, headers: headers })
     })
   },
   newClan(id) {
     return new Promise((resolve, reject) => {
-      let body = JSON.stringify({token: HRapiTOKEN, id: id})
+      let body = JSON.stringify({token: apiKEY, id: id})
       let headers = { 'Content-Type': 'application/json' }
       fetch(url+'/newclan', { method: 'POST', body: body, headers: headers })
     })
   },
   deleteClan(id) {
     return new Promise((resolve, reject) => {
-      let body = JSON.stringify({token: HRapiTOKEN, id: id})
+      let body = JSON.stringify({token: apiKEY, id: id})
       let headers = { 'Content-Type': 'application/json' }
       fetch(url+'/deleteclan', { method: 'POST', body: body, headers: headers })
     })
@@ -116,7 +116,7 @@ module.exports = {
   },
   updateTournament(id, what, to) {
     return new Promise((resolve, reject) => {
-      fetch(`${url}/updatetournament?token=${HRapiTOKEN}&id=${id}&what=${what}&to=${to}`)
+      fetch(`${url}/updatetournament?token=${apiKEY}&id=${id}&what=${what}&to=${to}`)
         .then(res => res.text()).then(resolve)
     })
   },
@@ -128,13 +128,13 @@ module.exports = {
   },
   startTournament(id) {
     return new Promise((resolve, reject) => {
-      fetch(`${url}/starttournament?id=${id}&token=${HRapiTOKEN}`)
+      fetch(`${url}/starttournament?id=${id}&token=${apiKEY}`)
         .then(res => res.text()).then(resolve)
     })
   },
   newTournament(name) {
     return new Promise((resolve, reject) => {
-      fetch(`${url}/newtournament?name=${name}&token=${HRapiTOKEN}`)
+      fetch(`${url}/newtournament?name=${name}&token=${apiKEY}`)
         .then(res => res.json()).then(resolve)
     })
   },
