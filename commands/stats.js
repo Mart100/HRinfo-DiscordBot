@@ -1,12 +1,12 @@
 const Discord = require('discord.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 const HRapi = require('../scripts/HRapi.js')
 
 module.exports = async (message) => {
   let p = process.env.prefix
   let player
-  let players = await database.getPlayers()
-  let clans = await database.getClans()
+  let players = await HRIapi.getPlayers()
+  let clans = await HRIapi.getClans()
   let args = message.content.toLowerCase().split(' ')
 
 
@@ -17,7 +17,7 @@ module.exports = async (message) => {
   } 
   // own profile
   else {
-    if(await database.isPlayer(message.author.id)) player = await database.getPlayer(message.author.id)
+    if(await HRIapi.isPlayer(message.author.id)) player = await HRIapi.getPlayer(message.author.id)
     else return message.channel.send(`You're not registered yet! Register with \`${p}register\``)
   }
 

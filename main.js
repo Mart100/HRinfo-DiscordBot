@@ -4,14 +4,13 @@ const env = require('node-env-file')(__dirname + '/.env', {raise: false})
 process.env.botperms = Number(process.env.botperms)
 // require scripts
 const commands = require('./scripts/commands.js')
-const database = require('./scripts/database.js')
+const HRIapi = require('./scripts/HRIapi.js')
 const onJoin = require('./scripts/onJoin.js')
 const onmemberjoin = require('./scripts/onmemberjoin.js')
 
-database.initialize()
-
 bot.on('ready', async guild => {
   console.log(bot.user.username + ' is ready!')
+  require('./scripts/everyDay.js')(bot)
   try {
     let link = await bot.generateInvite([Number(process.env.botperms)])
     console.log(link)
@@ -22,9 +21,7 @@ bot.on('ready', async guild => {
 })
 
 // on new user joined
-bot.on('guildMemberAdd', async (member) => { 
-  onmemberjoin(member) 
-})
+bot.on('guildMemberAdd', async (member) => { onmemberjoin(member) })
 
 // joined new guild
 bot.on('guildCreate', async (guild) => { onJoin(guild) })

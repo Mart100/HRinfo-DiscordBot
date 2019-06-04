@@ -1,25 +1,25 @@
 const utils = require('../scripts/utils.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 const p = process.env.prefix
 
 module.exports = async (message) => {
   let guild = message.guild
   let guildID = guild.id
 
-  if(await database.isClan(guildID)) return message.channel.send(`This server is already registered as a clan.`)
+  if(await HRIapi.isClan(guildID)) return message.channel.send(`This server is already registered as a clan.`)
 
   message.channel.send(text)
 
-  database.newClan(guildID)
+  HRIapi.newClan(guildID)
 
   await utils.sleep(5000)
 
-  database.updateClan(guildID, 'discordMemberCount', guild.memberCount)
-  database.updateClan(guildID, 'name', guild.name)
-  database.updateClan(guildID, 'image', guild.iconURL)
+  HRIapi.updateClan(guildID, 'discordMemberCount', guild.memberCount)
+  HRIapi.updateClan(guildID, 'name', guild.name)
+  HRIapi.updateClan(guildID, 'image', guild.iconURL)
 
-  // create invite and add to database
-  message.channel.createInvite({maxAge: 0, unique: true}).then(invite => database.updateClan(guildID, 'invite', invite.code))
+  // create invite and add to HRIapi
+  message.channel.createInvite({maxAge: 0, unique: true}).then(invite => HRIapi.updateClan(guildID, 'invite', invite.code))
 }
 
 let text = `

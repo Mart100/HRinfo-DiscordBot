@@ -1,12 +1,12 @@
 const Discord = require('discord.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 const utils = require('../scripts/utils.js')
 
 module.exports = async (message) => {
   let p = process.env.prefix
   let clan
-  let players = await database.getPlayers()
-  let clans = await database.getClans()
+  let players = await HRIapi.getPlayers()
+  let clans = await HRIapi.getClans()
   let args = message.content.toLowerCase().split(' ')
 
   let totalHRpoints = 0

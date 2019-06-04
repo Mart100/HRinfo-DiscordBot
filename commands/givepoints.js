@@ -1,4 +1,4 @@
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 
 module.exports = async (message) => {
   let mai = message.author.id
@@ -10,12 +10,12 @@ module.exports = async (message) => {
   let pointAmount = Number(args[2])
   let toID = args[1].replace('<@', '').replace('>', '')
 
-  let toPlayer = await database.getPlayer(toID)
+  let toPlayer = await HRIapi.getPlayer(toID)
   let toPlayerUser = message.client.users.find((u) => u.id == toID)
 
   if(toPlayer == undefined) return message.channel.send('Player not found')
 
-  database.updatePlayer(toID, 'points', (toPlayer.points+pointAmount))
+  HRIapi.updatePlayer(toID, 'points', (toPlayer.points+pointAmount))
 
   message.channel.send(`Successfully gave ${pointAmount} points to **${toPlayerUser.username+'#'+toPlayerUser.discriminator}**`)
 

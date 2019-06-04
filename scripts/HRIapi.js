@@ -1,32 +1,10 @@
-let admin
-let db
-let clanList = {}
-let weaponList = {}
-let playerList = {}
-
 const utils = require('./utils.js')
 const { URLSearchParams } = require('url')
 const fetch = require('node-fetch')
-const serviceAccount = require("../databaseCredentials.json")
 let HRapiTOKEN = 'aB9gHcoyQkVdCAPnr7xCtl52JXY5rpPY'
 let url = process.env.hrinfoAPI
 
 module.exports = {
-  initialize() {
-
-    let firebaseAdmin = require("firebase-admin")
-
-    firebaseAdmin.initializeApp({
-      credential: firebaseAdmin.credential.cert(serviceAccount),
-      databaseURL: "https://helmetroyaleinfo.firebaseio.com"
-    })
-
-    db = firebaseAdmin.firestore()
-
-    db.settings({timestampsInSnapshots: true})
-    console.log('Database Initialized')
-
-  },
   /*=======================*/
   /*========WEAPONS========*/
   /*=======================*/

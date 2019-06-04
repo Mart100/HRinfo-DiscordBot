@@ -1,4 +1,4 @@
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 const HRapi = require('../scripts/HRapi.js')
 
 module.exports = async (message) => {
@@ -12,7 +12,7 @@ module.exports = async (message) => {
   
   if(stats == undefined) return message.channel.send(`ID undefined, \`${p}connectgame\` For more info`)
 
-  database.updatePlayer(message.author.id, 'gameID', gameID)
+  HRIapi.updatePlayer(message.author.id, 'gameID', gameID)
 
   message.channel.send(`Successfully connected as \`${stats.name}\``)
 }

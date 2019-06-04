@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-const database = require('../scripts/database.js')
 const utils = require('../scripts/utils.js')
 const fetch = require('node-fetch')
 

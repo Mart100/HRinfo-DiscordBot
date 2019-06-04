@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-const database = require('../scripts/database.js')
 
 module.exports = (message) => {
   try {

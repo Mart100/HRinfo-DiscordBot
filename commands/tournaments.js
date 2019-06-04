@@ -1,11 +1,10 @@
 const Discord = require('discord.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 
 module.exports = async (message) => {
   let p = process.env.prefix
   let args = message.content.toLowerCase().split(' ')
-  let tournaments = await database.getTournaments()
-  console.log(tournaments)
+  let tournaments = await HRIapi.getTournaments()
   let tournamentsField = ``
 
   for(let tournamentID in tournaments) {

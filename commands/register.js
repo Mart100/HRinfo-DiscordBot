@@ -1,16 +1,16 @@
 const utils = require('../scripts/utils.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 const prefix = process.env.prefix
 
 module.exports = async (message) => {
   let guild = message.guild
   let guildID = guild.id
 
-  if(await database.isPlayer(message.author.id)) return message.channel.send(`You are already registered!`)
+  if(await HRIapi.isPlayer(message.author.id)) return message.channel.send(`You are already registered!`)
 
   message.channel.send('Successfully registered!')
 
-  // set player in database
-  database.newPlayer(message.author)
+  // set player in HRIapi
+  HRIapi.newPlayer(message.author)
 
 }

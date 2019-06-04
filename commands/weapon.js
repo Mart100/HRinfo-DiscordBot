@@ -1,10 +1,10 @@
 const Discord = require('discord.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('./scripts/HRIapi.js')
 
 module.exports = async (message) => {
   let p = process.env.prefix
   let args = message.content.toLowerCase().split(' ')
-  let weapons = await database.getWeapons()
+  let weapons = await HRIapi.getWeapons()
   let weapon
   let weaponArg = args[1]
 

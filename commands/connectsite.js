@@ -1,7 +1,7 @@
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 
 module.exports = async (message) => {
-  let response = await database.getPlayerToken(message.author.id)
+  let response = await HRIapi.getPlayerToken(message.author.id)
   let token = response.token
   let text = `
 Click this link to log into the site:

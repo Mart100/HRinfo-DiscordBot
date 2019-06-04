@@ -1,5 +1,4 @@
 const utils = require('./utils.js')
-const database = require('./database.js')
 const p = process.env.prefix
 
 module.exports = async (guild) => {

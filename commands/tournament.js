@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const challonge = require('../scripts/challonge.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 const _ = require('lodash')
 const { URLSearchParams } = require('url')
 const fetch = require('node-fetch')
@@ -8,14 +8,14 @@ const fetch = require('node-fetch')
 module.exports = async (message) => {
   let p = process.env.prefix
   let args = message.content.split(' ')
-  let tournaments = await database.getTournaments()
+  let tournaments = await HRIapi.getTournaments()
 
   let tournament = Object.values(tournaments).find(t => t.name == args[1])
 
   if(args[2] == 'join') {
     // check if not already in
-    let playerToken = await database.getPlayerToken(message.author.id)
-    let response = await database.joinTournament(tournament.id, playerToken)
+    let playerToken = await HRIapi.getPlayerToken(message.author.id)
+    let response = await HRIapi.joinTournament(tournament.id, playerToken)
     if(response == 'SUCCESS') response = `Successfully joined tournament ${tournament.name}`
     message.channel.send(response)
   }
@@ -25,28 +25,28 @@ module.exports = async (message) => {
     if(tournament == undefined) return message.channel.send(`Tournament ${args[1]} is undefined!`)
     let what = args[3]
     let to = args[4]
-    let response = database.updateTournament(tournament.id, what, to)
+    let response = HRIapi.updateTournament(tournament.id, what, to)
     message.channel.send('Done')
   }
 
   else if(args[2] == 'start') {
     if(!checkADMINperms(message, tournament)) return message.channel.send('No permissions to start tournament')
     if(tournament == undefined) return message.channel.send(`Tournament ${args[1]} is undefined!`)
-    database.startTournament(tournament.id)
+    HRIapi.startTournament(tournament.id)
   }
 
   else if(args[2] == 'create') {
     if(!createTournamentPerms.includes(message.author.id)) return message.channel.send('No permissions to create tournament')
 
     // new tournament
-    let response = await database.newTournament(args[1])
+    let response = await HRIapi.newTournament(args[1])
     if(response.errors) return message.channel.send(response.errors.toString())
 
     // get tournament from db
-    tournaments = await database.getTournaments()
+    tournaments = await HRIapi.getTournaments()
     tournament = Object.values(tournaments).find(t => t.name == args[1])
 
-    await database.updateTournament(tournament.id, 'host', message.guild.id)
+    await HRIapi.updateTournament(tournament.id, 'host', message.guild.id)
 
     
     message.channel.send('Successfully created tournamed: ' + args[1])

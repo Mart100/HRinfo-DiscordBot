@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 const fs = require('fs')
 const partners = JSON.parse(fs.readFileSync('./partners.json', 'utf8'))
 

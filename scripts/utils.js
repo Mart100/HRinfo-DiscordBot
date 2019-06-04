@@ -1,5 +1,3 @@
-const database = require('../scripts/database.js')
-
 module.exports = {
   getGeneralChannel(guild) {
     let channels = guild.channels

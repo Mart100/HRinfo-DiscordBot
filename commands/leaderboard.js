@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 const HRapi = require('../scripts/HRapi.js')
 
 
@@ -24,7 +24,7 @@ module.exports = async (message) => {
 
 async function leaderboardComp(message) {
   let args = message.content.toLowerCase().split(' ')
-  let players = await database.getPlayers()
+  let players = await HRIapi.getPlayers()
   let page = 0
   if(args[2] != undefined) page = Number(args[2])-1
 

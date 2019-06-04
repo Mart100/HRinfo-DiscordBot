@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const database = require('../scripts/database.js')
+const HRIapi = require('../scripts/HRIapi.js')
 const utils = require('../scripts/utils.js')
 
 module.exports = async (message) => {
@@ -9,10 +9,10 @@ module.exports = async (message) => {
   let name = args.join(' ')
   let p = process.env.prefix
 
-  // if clan is not in database
-  if(!await database.isClan(message.guild.id)) return message.channel.send(`This server is not yet registered as a clan. Register with \`${p}registerclan\``)
+  // if clan is not in HRIapi
+  if(!await HRIapi.isClan(message.guild.id)) return message.channel.send(`This server is not yet registered as a clan. Register with \`${p}registerclan\``)
 
-  database.updateClan(message.guild.id, 'name', name)
+  HRIapi.updateClan(message.guild.id, 'name', name)
 
   message.channel.send(`Succesfully set clan name to: \`${name}\``)
 }
