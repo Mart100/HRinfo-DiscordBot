@@ -137,5 +137,20 @@ module.exports = {
       fetch(`${url}/newtournament?name=${name}&token=${HRapiTOKEN}`)
         .then(res => res.json()).then(resolve)
     })
+  },
+  /*==============================*/
+  /*============TIMERS============*/
+  /*==============================*/
+  getTimers() {
+    return new Promise((resolve, reject) => {
+      fetch(`${url}/timers`)
+        .then(res => res.json()).then(resolve)
+    })
+  },
+  updateTimers(what, to) {
+    return new Promise((resolve, reject) => {
+      fetch(`${url}/updatetimers?token=${apiKEY}&what=${what}&to=${to}`)
+        .then(res => res.text()).then(resolve)
+    })
   }
 }
