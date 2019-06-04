@@ -38,6 +38,7 @@ async function sendTournamentReminder() {
     for(let playerID in tournament.players) {
       let chollID = tournament.players[playerID]
       let match = await challonge.getCurrentPlayerMatch(tournament.name, chollID)
+      if(match.length == 0) continue
       match = match[0].match
       let playerUser = client.users.find((u) => u.id == playerID)
 
