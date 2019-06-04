@@ -1,4 +1,4 @@
-const HRIapi = require('./scripts/HRIapi.js')
+const HRIapi = require('./HRIapi.js')
 const utils = require('./utils.js')
 
 module.exports = async (member) => {
