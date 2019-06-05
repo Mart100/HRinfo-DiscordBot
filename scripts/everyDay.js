@@ -70,6 +70,11 @@ async function doCoinFlips() {
   // loop trough tournament
   for(let tournamentID in tournaments) {
     let tournament = tournaments[tournamentID]
+
+    // filter tournaments
+    if(tournament.status != 'ongoing') continue
+
+
     let matches = await challonge.getMatches(tournament.name)
     // loop trough matches
     for(let match of matches) {
