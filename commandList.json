@@ -89,5 +89,8 @@
   },
   "match": {
     "permissions": "all"
+  },
+  "map": {
+    "permissions": "all"
   }
 }
