@@ -6,7 +6,9 @@ module.exports = async (message) => {
   React with ⚔ to notify them for a match!
   ` 
 
-  if(message.guild.id != 579651261054451752) return message.channel.send('This command is only avaible in Helpmet Competitive!')
+  if(message.guild.id != 579651261054451752) {
+    return message.channel.send(`This command is only avaible in Helpmet Competitive! Use \`${}partners\` for invite!`)
+  }
   
   let messageSend = await message.guild.channels.find(c => c.id == 586242295091953684).send(text)
   
