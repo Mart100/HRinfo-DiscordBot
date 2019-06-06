@@ -8,7 +8,7 @@ module.exports = async (message) => {
   ` 
 
   if(message.guild.id != 579651261054451752) {
-    return message.channel.send(`This command is only avaible in Helpmet Competitive! Use \`${p}partners\` for invite!`)
+    return message.channel.send(`This command is only available in Helmet Competitive! Use \`${p}partners\` for invite!`)
   }
   
   let messageSend = await message.guild.channels.find(c => c.id == 586242295091953684).send(text)
