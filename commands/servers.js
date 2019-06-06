@@ -9,16 +9,16 @@ module.exports = async (message) => {
   let saCount = 0
   let asCount = 0
 
-  fetch('https://us-east-match.hrbackend.io:8100/count', { method: 'GET', headers: {Origin: 'https://helmetroyale.io'} })
+  fetch('https://us-east-match.hrbackend.com:8100/count', { method: 'GET', headers: {Origin: 'https://helmetroyale.io'} })
     .then(res => res.json()).then(json => usCount = json.count)
 
-  fetch('https://sa-east-match.hrbackend.io:8100/count', { method: 'GET', headers: {Origin: 'https://helmetroyale.io'} })
+  fetch('https://sa-east-match.hrbackend.com:8100/count', { method: 'GET', headers: {Origin: 'https://helmetroyale.io'} })
     .then(res => res.json()).then(json => saCount = json.count)
 
-  fetch('https://eu-match.hrbackend.io:8100/count', { method: 'GET', headers: {Origin: 'https://helmetroyale.io'} })
+  fetch('https://eu-match.hrbackend.com:8100/count', { method: 'GET', headers: {Origin: 'https://helmetroyale.io'} })
     .then(res => res.json()).then(json => euCount = json.count)
 
-  fetch('https://kor-match.hrbackend.io:8100/count', { method: 'GET', headers: {Origin: 'https://helmetroyale.io'} })
+  fetch('https://kor-match.hrbackend.com:8100/count', { method: 'GET', headers: {Origin: 'https://helmetroyale.io'} })
     .then(res => res.json()).then(json => asCount = json.count)
 
   await utils.sleep(1000)
