@@ -7,16 +7,29 @@ module.exports = async (message) => {
   let clan
   let players = await HRIapi.getPlayers()
   let clans = await HRIapi.getClans()
+  let playingCount = await HRIapi.getPlayingCount()
+  let getHRaccounts = await HRIapi.getHRaccounts()
+  let tournaments = await HRIapi.getTournaments()
+
   let args = message.content.toLowerCase().split(' ')
 
   let totalHRpoints = 0
-  for(let id in players) totalHRpoints += players[id].points
+  let totalGameConnectedAccounts = 0
+  for(let id in players) {
+    let player = players[id]
+    totalHRpoints += player.points
+    if(player.gameID && player.gameID != 'none') totalGameConnectedAccounts++
+  }
 
 
   let stats = `
-**USERS:** ${Object.keys(players).length}
-**CLANS:** ${Object.keys(clans).length}
-**TOTAL HC POINTS:** ${totalHRpoints}
+**Users:** ${Object.keys(players).length}
+**Users with game connected:** ${totalGameConnectedAccounts}
+**Anonymous HR accounts Stored: **${Object.keys(getHRaccounts).length}
+**Clans:** ${Object.keys(clans).length}
+**Tournaments:** ${Object.keys(tournaments).length}
+**PlayingCount recorded:** ${Object.keys(playingCount).length}
+**Total HC Points:** ${totalHRpoints}
   `
 
   let Embed = new Discord.RichEmbed()

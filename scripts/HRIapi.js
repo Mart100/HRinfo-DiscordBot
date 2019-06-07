@@ -152,5 +152,20 @@ module.exports = {
       fetch(`${url}/updatetimers?token=${apiKEY}&what=${what}&to=${to}`)
         .then(res => res.text()).then(resolve)
     })
+  },
+  /*=============================*/
+  /*============OTHER============*/
+  /*=============================*/
+  getPlayingCount() {
+    return new Promise((resolve, reject) => {
+      fetch(`${url}/playingcount`)
+        .then(res => res.json()).then(resolve)
+    })
+  },
+  getHRaccounts() {
+    return new Promise((resolve, reject) => {
+      fetch(`${url}/hraccounts`)
+        .then(res => res.json()).then(resolve)
+    })
   }
 }

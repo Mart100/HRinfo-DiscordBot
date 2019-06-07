@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const HRIapi = require('./scripts/HRIapi.js')
+const HRIapi = require('../scripts/HRIapi.js')
 
 module.exports = async (message) => {
   let p = process.env.prefix

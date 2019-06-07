@@ -32,7 +32,8 @@ module.exports = async (message) => {
   else if(args[2] == 'start') {
     if(!checkADMINperms(message, tournament)) return message.channel.send('No permissions to start tournament')
     if(tournament == undefined) return message.channel.send(`Tournament ${args[1]} is undefined!`)
-    HRIapi.startTournament(tournament.id)
+    let response = HRIapi.startTournament(tournament.id)
+    message.channel.send(response)
   }
 
   else if(args[2] == 'create') {
@@ -60,10 +61,91 @@ module.exports = async (message) => {
         message.channel.send(txt)
       })
   }
+  else if(args[2] == 'leave') {
+    if(tournament == undefined) return message.channel.send('Tournament undefined!')
+    let TMtargetPlayer = tournament.players[message.author.id]
+    let response = await HRIapi.leaveTournament(tournament.id, message.author.id)
+    if(response == 'TOURNAMENT NOT OPEN') return message.channel.send(`Can't leave an ongoing match. Use \`${p}tournament ${tournament.name} forfeit\` instead`)
+    message.channel.send('Successfully left tournament!')
+  }
 
   else if(args[2] == 'bracket' || args[2] == 'brackets') {
     message.channel.send(`Brackets for **${tournament.name}**: https://challonge.com/${tournament.name}`)
   }
+
+  else if(args[2] == 'forfeit') {
+    if(tournament == undefined) return message.channel.send('Tournament undefined!')
+
+    // status of tournament
+    if(tournament.status == 'open') return message.channel.send(`Tournament has not started yet! use \`${p}tournament ${tournament.name} leave\` instead`)
+    if(tournament.status == 'closed') return message.channel.send('Tournament has already finished!')
+
+
+    let playerChallID = tournament.players[message.author.id].challongeID
+    let match = await challonge.getCurrentPlayerMatch(tournament.name, playerChallID)
+    if(match[0] == undefined) return message.channel.send('Please wait for a match before you can fortfeit!')
+    match = match[0].match
+    let userIsPlayer1 = false
+    let opponent
+    if(playerChallID == match.player1_id) {
+      opponent = Object.values(tournament.players).find((p) => p.challongeID == match.player2_id).id
+      userIsPlayer1 = true
+    }
+    if(playerChallID == match.player2_id) {
+      opponent = Object.values(tournament.players).find((p) => p.challongeID == match.player1_id).id
+      userIsPlayer1 = false
+    }
+
+    let score
+    if(userIsPlayer1) score = '0-1'
+    else score = '1-0'
+
+    let response = await challonge.updateMatch(tournament.name, match.id, score, tournament.players[opponent].challongeID)
+    message.channel.send('Successfully forfeited!')
+  }
+
+  else if(args[2] == 'shuffle') {
+    if(!checkADMINperms(message, tournament)) return message.channel.send('No permissions to empty tournament')
+    challonge.shuffleTournament(tournament.shuffle)
+    message.channel.send(`Successfully shuffled tournament **${tournament.name}**!`)
+  }
+
+  else if(args[2] == 'extendlimit') {
+    if(!checkADMINperms(message, tournament)) return message.channel.send('No permissions tournament admin commands')
+    let args = message.content.split(' ')
+    let tournaments = await zrnAPI.getTournaments()
+    let tournament = Object.values(tournaments).find(t => t.name == args[1])
+    if(args[3] == undefined) message.channel.send(`**Usage:** ${process.env.prefix}extendlimit <user | all> <amount of days>`)
+    if(tournament == undefined) return message.channel.send('Tournament undefined')
+    args[3] = args[3].replace('<@', '').replace('>', '')
+    let TMtargetPlayer = tournament.players[args[3]]
+    if(TMtargetPlayer == undefined) return message.channel.send('Player is not defined or not in tournament.')
+    let days = Number(args[4])
+    TMtargetPlayer.extendLimit += days
+    zrnAPI.updateTournament(tournament.id, 'players', JSON.stringify(tournament.players))
+    let targetUser = message.client.users.find(u => u.id == TMtargetPlayer.id)
+    let playerNextMatch = await challonge.getCurrentPlayerMatch(tournament.name, TMtargetPlayer.challongeID)
+    let daysLeft = ((tournament.roundMaxTime*playerNextMatch[0].match.round) - Math.floor((Date.now() - tournament.startDate)/(1000*60*60*24))) + tournament.players[TMtargetPlayer.id].extendLimit
+    let text = `Successfully extended **${targetUser.username+'#'+targetUser.discriminator}** to ${days} more days! They now have **${daysLeft}** days left to finish next match!`
+    message.channel.send(text)
+  }
+
+  else if(args[2] == 'reactmessage') {
+    if(!checkADMINperms(message, tournament)) return message.channel.send('No permissions tournament admin commands')
+    let reactMessage = await message.channel.fetchMessage(args[3])
+    if(reactMessage == undefined) return message.channel.send(`Usage: ${p}tournament ${tournament.name} reactmessage <message id to bind>`)
+    reactMessage.react('✅')
+    await zrnAPI.updateTournament(tournament.id, 'reactionCollector', `${reactMessage.guild.id}.${reactMessage.channel.id}.${reactMessage.id}`)
+    const filter = (reaction, user) => true
+    const collector = reactMessage.createReactionCollector(filter, {})
+    collector.on('collect', (reaction) => {
+      let user = reaction.users.last()
+      if(user.bot) return
+      zrnAPI.joinTournament(tournament.id, user)
+    })
+    message.channel.send('Successfully added reaction joining to the message!')
+  }
+
 
   else if(args[2] == 'results') {
     if(args[3] == undefined) {
