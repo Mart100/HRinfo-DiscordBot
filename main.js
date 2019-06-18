@@ -10,7 +10,6 @@ const onmemberjoin = require('./scripts/onmemberjoin.js')
 
 bot.on('ready', async guild => {
   console.log(bot.user.username + ' is ready!')
-  require('./scripts/everyDay.js')(bot)
   try {
     let link = await bot.generateInvite([Number(process.env.botperms)])
     console.log(link)
